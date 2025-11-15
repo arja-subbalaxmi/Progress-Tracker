@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Progress Tracker - Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+</head>
+<body>
+    <!-- Navigation Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2>📚 Study Tracker</h2>
+            <button class="toggle-btn" id="toggleSidebar">☰</button>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="index.html" class="active">📊 Dashboard</a></li>
+            <li><a href="daily-log.html">📝 Daily Log</a></li>
+            <li><a href="subjects.html">📚 Subject Progress</a></li>
+            <li><a href="mock-tests.html">🎯 Mock Tests</a></li>
+            <li><a href="calendar.html">📅 Calendar</a></li>
+            <li><a href="analytics.html">📈 Analytics</a></li>
+            <li><a href="settings.html">⚙️ Settings</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header class="page-header">
+            <div>
+                <h1>Dashboard</h1>
+                <p class="subtitle">Track your competitive exam preparation journey</p>
+            </div>
+            <div class="header-actions">
+                <button class="btn-icon" id="darkModeToggle" title="Toggle dark mode">🌙</button>
+            </div>
+        </header>
+
+        <!-- Motivational Quote -->
+        <div class="quote-card">
+            <p class="quote-text" id="quoteText">Loading...</p>
+        </div>
+
+        <!-- Exam Countdown -->
+        <div class="countdown-section">
+            <div class="countdown-card">
+                <h3>GATE 2026</h3>
+                <div class="countdown" id="gateCountdown">
+                    <div class="countdown-item">
+                        <span class="count" id="gateDays">0</span>
+                        <span class="label">Days</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="count" id="gateHours">0</span>
+                        <span class="label">Hours</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="count" id="gateMinutes">0</span>
+                        <span class="label">Mins</span>
+                    </div>
+                </div>
+            </div>
+            <div class="countdown-card">
+                <h3>UGC NET December 2025</h3>
+                <div class="countdown" id="netCountdown">
+                    <div class="countdown-item">
+                        <span class="count" id="netDays">0</span>
+                        <span class="label">Days</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="count" id="netHours">0</span>
+                        <span class="label">Hours</span>
+                    </div>
+                    <div class="countdown-item">
+                        <span class="count" id="netMinutes">0</span>
+                        <span class="label">Mins</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">📖</div>
+                <div class="stat-content">
+                    <h3 id="topicsCompleted">0</h3>
+                    <p>Topics Completed</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">💻</div>
+                <div class="stat-content">
+                    <h3 id="problemsSolved">0</h3>
+                    <p>Problems Solved</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📝</div>
+                <div class="stat-content">
+                    <h3 id="mockTestsTaken">0</h3>
+                    <p>Mock Tests Taken</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">⏱️</div>
+                <div class="stat-content">
+                    <h3 id="studyHoursWeek">0h</h3>
+                    <p>Study Hours (This Week)</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🔥</div>
+                <div class="stat-content">
+                    <h3 id="currentStreak">0</h3>
+                    <p>Day Streak</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">📊</div>
+                <div class="stat-content">
+                    <h3 id="avgDailyHours">0h</h3>
+                    <p>Avg Daily Hours</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="charts-section">
+            <div class="chart-card">
+                <h3>Weekly Study Hours (Last 7 Days)</h3>
+                <canvas id="weeklyHoursChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <h3>Subject-wise Progress</h3>
+                <canvas id="subjectProgressChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Progress Overview -->
+        <div class="progress-section">
+            <h2>Overall Progress</h2>
+            <div class="progress-card">
+                <div class="progress-header">
+                    <span>Monthly Goal Progress</span>
+                    <span id="monthlyGoalPercent">0%</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="monthlyGoalProgress" style="width: 0%"></div>
+                </div>
+            </div>
+            
+            <div class="goals-overview">
+                <div class="goal-item">
+                    <span>📚 Study Hours</span>
+                    <div class="goal-progress">
+                        <span id="goalStudyHours">0 / 250</span>
+                    </div>
+                </div>
+                <div class="goal-item">
+                    <span>📖 Topics Completed</span>
+                    <div class="goal-progress">
+                        <span id="goalTopics">0 / 15</span>
+                    </div>
+                </div>
+                <div class="goal-item">
+                    <span>🎯 Mock Tests</span>
+                    <div class="goal-progress">
+                        <span id="goalMockTests">0 / 8</span>
+                    </div>
+                </div>
+                <div class="goal-item">
+                    <span>💻 Problems Solved</span>
+                    <div class="goal-progress">
+                        <span id="goalProblems">0 / 500</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="activity-section">
+            <h2>Recent Activity</h2>
+            <div class="activity-list" id="recentActivity">
+                <p class="no-data">No recent activity</p>
+            </div>
+        </div>
+
+        <!-- Achievements -->
+        <div class="achievements-section">
+            <h2>🏆 Achievements</h2>
+            <div class="achievements-grid" id="achievementsList">
+                <!-- Achievements will be populated by JS -->
+            </div>
+        </div>
+    </main>
+
+    <script src="js/storage.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/charts.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

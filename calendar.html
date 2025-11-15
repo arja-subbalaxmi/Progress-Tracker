@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendar - Study Progress Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2>📚 Study Tracker</h2>
+            <button class="toggle-btn" id="toggleSidebar">☰</button>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="index.html">📊 Dashboard</a></li>
+            <li><a href="daily-log.html">📝 Daily Log</a></li>
+            <li><a href="subjects.html">📚 Subject Progress</a></li>
+            <li><a href="mock-tests.html">🎯 Mock Tests</a></li>
+            <li><a href="calendar.html" class="active">📅 Calendar</a></li>
+            <li><a href="analytics.html">📈 Analytics</a></li>
+            <li><a href="settings.html">⚙️ Settings</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header class="page-header">
+            <div>
+                <h1>Study Calendar</h1>
+                <p class="subtitle">Visual overview of your study days</p>
+            </div>
+            <div class="header-actions">
+                <button class="btn-icon" id="darkModeToggle" title="Toggle dark mode">🌙</button>
+            </div>
+        </header>
+
+        <!-- Calendar Legend -->
+        <div class="calendar-legend">
+            <div class="legend-item">
+                <span class="legend-color" style="background: #E5E7EB;"></span>
+                <span>No study</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color" style="background: #BFDBFE;"></span>
+                <span>1-4 hours</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color" style="background: #60A5FA;"></span>
+                <span>5-7 hours</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color" style="background: #2563EB;"></span>
+                <span>8+ hours</span>
+            </div>
+        </div>
+
+        <!-- Calendar Navigation -->
+        <div class="calendar-nav">
+            <button class="btn-secondary" id="prevMonth">← Previous</button>
+            <h2 id="currentMonth">November 2025</h2>
+            <button class="btn-secondary" id="nextMonth">Next →</button>
+        </div>
+
+        <!-- Calendar Grid -->
+        <div class="calendar-container">
+            <div class="calendar-grid">
+                <div class="calendar-header">Sun</div>
+                <div class="calendar-header">Mon</div>
+                <div class="calendar-header">Tue</div>
+                <div class="calendar-header">Wed</div>
+                <div class="calendar-header">Thu</div>
+                <div class="calendar-header">Fri</div>
+                <div class="calendar-header">Sat</div>
+                <!-- Calendar days will be populated by JS -->
+                <div id="calendarDays"></div>
+            </div>
+        </div>
+
+        <!-- Selected Day Details -->
+        <div class="day-details" id="dayDetails" style="display: none;">
+            <h3>Study Details - <span id="selectedDate"></span></h3>
+            <div id="dayDetailsContent">
+                <!-- Will be populated by JS -->
+            </div>
+        </div>
+
+        <!-- Monthly Summary -->
+        <div class="monthly-summary">
+            <h2>Monthly Summary</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">📚</div>
+                    <div class="stat-content">
+                        <h3 id="monthStudyDays">0</h3>
+                        <p>Study Days</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⏱️</div>
+                    <div class="stat-content">
+                        <h3 id="monthTotalHours">0h</h3>
+                        <p>Total Hours</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">📊</div>
+                    <div class="stat-content">
+                        <h3 id="monthAvgHours">0h</h3>
+                        <p>Avg Daily Hours</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🔥</div>
+                    <div class="stat-content">
+                        <h3 id="monthStreak">0</h3>
+                        <p>Longest Streak</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/storage.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

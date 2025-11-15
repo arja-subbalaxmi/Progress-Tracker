@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Study Log - Study Progress Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation Sidebar -->
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2>📚 Study Tracker</h2>
+            <button class="toggle-btn" id="toggleSidebar">☰</button>
+        </div>
+        <ul class="nav-menu">
+            <li><a href="index.html">📊 Dashboard</a></li>
+            <li><a href="daily-log.html" class="active">📝 Daily Log</a></li>
+            <li><a href="subjects.html">📚 Subject Progress</a></li>
+            <li><a href="mock-tests.html">🎯 Mock Tests</a></li>
+            <li><a href="calendar.html">📅 Calendar</a></li>
+            <li><a href="analytics.html">📈 Analytics</a></li>
+            <li><a href="settings.html">⚙️ Settings</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <header class="page-header">
+            <div>
+                <h1>Daily Study Log</h1>
+                <p class="subtitle">Record your daily study progress</p>
+            </div>
+            <div class="header-actions">
+                <button class="btn-icon" id="darkModeToggle" title="Toggle dark mode">🌙</button>
+            </div>
+        </header>
+
+        <!-- Pomodoro Timer -->
+        <div class="pomodoro-section">
+            <div class="pomodoro-card">
+                <h3>🍅 Pomodoro Timer</h3>
+                <div class="pomodoro-display">
+                    <div class="timer-display" id="pomodoroDisplay">25:00</div>
+                    <div class="timer-controls">
+                        <button class="btn-secondary" id="pomodoroStart">Start</button>
+                        <button class="btn-secondary" id="pomodoroReset">Reset</button>
+                    </div>
+                    <div class="timer-mode">
+                        <label><input type="radio" name="timerMode" value="25" checked> Work (25m)</label>
+                        <label><input type="radio" name="timerMode" value="5"> Break (5m)</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Daily Log Form -->
+        <div class="form-card">
+            <form id="dailyLogForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="logDate">Date</label>
+                        <input type="date" id="logDate" name="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="studyHours">Study Hours</label>
+                        <input type="number" id="studyHours" name="studyHours" min="0" max="24" step="0.5" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="examFocus">Exam Focus</label>
+                        <select id="examFocus" name="examFocus" required>
+                            <option value="GATE">GATE</option>
+                            <option value="UGC NET">UGC NET</option>
+                            <option value="SEBI Grade A">SEBI Grade A</option>
+                            <option value="All">All</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <select id="subject" name="subject" required>
+                            <option value="Data Structures">Data Structures</option>
+                            <option value="Algorithms">Algorithms</option>
+                            <option value="Database Management">Database Management</option>
+                            <option value="Operating Systems">Operating Systems</option>
+                            <option value="Computer Networks">Computer Networks</option>
+                            <option value="Computer Organization">Computer Organization</option>
+                            <option value="Theory of Computation">Theory of Computation</option>
+                            <option value="Compiler Design">Compiler Design</option>
+                            <option value="Software Engineering">Software Engineering</option>
+                            <option value="Web Technologies">Web Technologies</option>
+                            <option value="General Aptitude">General Aptitude</option>
+                            <option value="Mathematics">Mathematics</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="problemsSolved">Problems Solved</label>
+                        <input type="number" id="problemsSolved" name="problemsSolved" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label for="platform">Platform</label>
+                        <input type="text" id="platform" name="platform" placeholder="LeetCode, GFG, etc.">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="topics">Topics Studied</label>
+                    <textarea id="topics" name="topics" rows="3" placeholder="e.g., Arrays, Linked Lists, Binary Trees"></textarea>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="mockTestScore">Mock Test Score (if any)</label>
+                        <input type="number" id="mockTestScore" name="mockTestScore" min="0" max="100">
+                    </div>
+                    <div class="form-group">
+                        <label for="energyLevel">Energy Level</label>
+                        <div class="star-rating">
+                            <span class="star" data-value="1">☆</span>
+                            <span class="star" data-value="2">☆</span>
+                            <span class="star" data-value="3">☆</span>
+                            <span class="star" data-value="4">☆</span>
+                            <span class="star" data-value="5">☆</span>
+                            <input type="hidden" id="energyLevel" name="energyLevel" value="3">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="notes">Notes/Observations</label>
+                    <textarea id="notes" name="notes" rows="4" placeholder="Write any observations, difficulties, or insights..."></textarea>
+                </div>
+
+                <!-- Daily Checklist -->
+                <div class="checklist-section">
+                    <h3>Daily Checklist</h3>
+                    <div class="checklist">
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="studyHoursCheck">
+                            <span>Achieved 8+ hours study</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="problemTargetCheck">
+                            <span>Completed daily problem target</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="revisionCheck">
+                            <span>Revised previous topics</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="formulaSheetsCheck">
+                            <span>Formula sheets practice</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="aptitudeCheck">
+                            <span>GA/Aptitude practice</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="exerciseCheck">
+                            <span>Exercise done</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" name="sleepCheck">
+                            <span>Proper sleep (7-8 hours)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">💾 Save Daily Log</button>
+                    <button type="button" class="btn-secondary" id="clearForm">Clear Form</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Recent Logs -->
+        <div class="logs-section">
+            <h2>Recent Logs</h2>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Hours</th>
+                            <th>Subject</th>
+                            <th>Topics</th>
+                            <th>Problems</th>
+                            <th>Energy</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recentLogs">
+                        <tr>
+                            <td colspan="7" class="no-data">No logs found</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/storage.js"></script>
+    <script src="js/utils.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
